@@ -3,6 +3,9 @@ import java.util.Arrays;
 
 public class RegExp {
 
+    // Set up utilities:
+    Calculator calculator = new Calculator();
+
     public void splitExp(String theexp){
 
         ArrayList<String> tokens = new ArrayList<>();
@@ -46,40 +49,7 @@ public class RegExp {
         String[]tokenArray = new String[tokens.size()];
         tokenArray = tokens.toArray(tokenArray);
         System.out.println(tokens);
-        calculate(tokenArray);
+        calculator.calculate(tokenArray);
     } // End splitExp()
-
-    public void calculate (String[] expression) {
-
-        // Member variables:
-        double result = 0;
-        String firstNumber = expression[0];
-        String operator = expression[1];
-        String secondNumber = expression[2];
-
-        // Determine type of calculation and perform:
-        switch (operator) {
-            case "+":
-                result = Double.parseDouble(firstNumber) + Double.parseDouble(secondNumber);
-                break;
-            case "-":
-                result = Double.parseDouble(firstNumber) - Double.parseDouble(secondNumber);
-                break;
-            case "/":
-                result = Double.parseDouble(firstNumber) / Double.parseDouble(secondNumber);
-                break;
-            case "*":
-                result = Double.parseDouble(firstNumber) * Double.parseDouble(secondNumber);
-                break;
-        }
-
-        /*if (expression[1].equals("+")) {
-            result = Double.parseDouble(expression[0]) + Double.parseDouble(expression[2]);
-        }*/
-
-        // Display results:
-        System.out.println(result);
-
-    } // End calculate()
 
 }
