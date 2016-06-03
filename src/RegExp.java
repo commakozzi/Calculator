@@ -1,52 +1,22 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class RegExp {
 
-    // Start utilities:
-    Scanner scanner = new Scanner(System.in);
+    public void splitExp(String theexp){
 
-    // findEquation regex:
-    void findEquation(String str) {
-
-        // Instance variables:
-        String mUserReply;
-
-        // Confirm and run or stop regex:
-        System.out.println("You want to RegEx " + str + " is that correct?");
-        mUserReply = scanner.nextLine();
-        if (mUserReply.toLowerCase().equals("yes")) {
-            splitExp(str);
-            System.exit(1);
-        } else {
-            System.out.println("Are you sure?");
-            mUserReply = scanner.nextLine();
-            if (mUserReply.toLowerCase().equals("yes")) {
-                System.out.println("Ok, thank you.  Have a good day.");
-                System.exit(1);
-            } else {
-                findEquation(str);
-            }
-        }
-
-    }
-
-    public String[] splitExp(String theexp){
-        ArrayList<String> tokens = new ArrayList<String>();
-        System.out.println(theexp);
+        ArrayList<String> tokens = new ArrayList<>();
         String expression = theexp.replaceAll("\\s+", "");
-        System.out.println(expression);
         String tem[] = expression.split("(?<=[-+*/%(),])(?=.)|(?<=.)(?=[-+*/%(),])");
-        ArrayList<String> temp = new ArrayList<String>(Arrays.asList(tem));
+        ArrayList<String> temp = new ArrayList<>(Arrays.asList(tem));
         String orig = null;
         String regex = "[-+/%*]+";
         String first = temp.get(0);
         tokens.add(first);
-        String secound = temp.get(1);
+        String second = temp.get(1);
         if(first.equals("-")){
             tokens.remove(0);
-            tokens.add(first+secound);
+            tokens.add(first+second);
         }
         for (int i = 0; i < temp.size(); i++) {
             String a = temp.get(i);
@@ -55,10 +25,8 @@ public class RegExp {
                 if(b.matches(regex) && a.matches("[-+]+")){
                     String c = temp.get(i-2);
                     if(c.matches("[-+]+")){
-                        System.out.println("MATCH");
                         break;
                     }else{
-                        System.out.println("NO MATCH");
                         orig = a;
                     }
                 }else if(orig != null && orig.equals("-")){
@@ -77,7 +45,41 @@ public class RegExp {
         }
         String[]tokenArray = new String[tokens.size()];
         tokenArray = tokens.toArray(tokenArray);
-        System.out.print(tokens);
-        return tokenArray;
-    }
+        System.out.println(tokens);
+        calculate(tokenArray);
+    } // End splitExp()
+
+    public void calculate (String[] expression) {
+
+        // Member variables:
+        double result = 0;
+        String firstNumber = expression[0];
+        String operator = expression[1];
+        String secondNumber = expression[2];
+
+        // Determine type of calculation and perform:
+        switch (operator) {
+            case "+":
+                result = Double.parseDouble(firstNumber) + Double.parseDouble(secondNumber);
+                break;
+            case "-":
+                result = Double.parseDouble(firstNumber) - Double.parseDouble(secondNumber);
+                break;
+            case "/":
+                result = Double.parseDouble(firstNumber) / Double.parseDouble(secondNumber);
+                break;
+            case "*":
+                result = Double.parseDouble(firstNumber) * Double.parseDouble(secondNumber);
+                break;
+        }
+
+        /*if (expression[1].equals("+")) {
+            result = Double.parseDouble(expression[0]) + Double.parseDouble(expression[2]);
+        }*/
+
+        // Display results:
+        System.out.println(result);
+
+    } // End calculate()
+
 }
