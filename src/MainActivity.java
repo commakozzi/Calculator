@@ -7,19 +7,17 @@ public class MainActivity {
         String mUserCalc;
         String mUserReply = "";
 
-        // Start utilities:
+        // Load utilities:
         Scanner scanner = new Scanner(System.in);
-        RegExp regExp = new RegExp();
+        Calculator calculator = new Calculator();
 
         // Get calculation from user and confirm:
         System.out.println("Enter your calculation:");
         mUserCalc = scanner.nextLine();
-        /*System.out.println("You entered " + mUserCalc + " is that correct?");
-        mUserReply = scanner.nextLine();*/
 
         // Send equation to RegExp to find equation:
         if (mUserReply != null) {
-            regExp.splitExp(mUserCalc);
+            calculator.calculate(mUserCalc);
         } else {
             System.out.println("You didn't enter a valid calculation.  Goodbye.");
             System.exit(1);

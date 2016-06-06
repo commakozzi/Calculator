@@ -1,28 +1,14 @@
+import com.fathzer.soft.javaluator.DoubleEvaluator;
+
 public class Calculator {
 
-    public void calculate (String[] expression) {
+//  public void calculate (String[] expression) {
+    public void calculate (String expression) {
 
-        // Member variables:
-        double result = 0;
-        String firstNumber = expression[0];
-        String operator = expression[1];
-        String secondNumber = expression[2];
+        // Load utilities:
+        DoubleEvaluator evaluator = new DoubleEvaluator();
 
-        // Determine type of calculation and perform:
-        switch (operator) {
-            case "+":
-                result = Double.parseDouble(firstNumber) + Double.parseDouble(secondNumber);
-                break;
-            case "-":
-                result = Double.parseDouble(firstNumber) - Double.parseDouble(secondNumber);
-                break;
-            case "/":
-                result = Double.parseDouble(firstNumber) / Double.parseDouble(secondNumber);
-                break;
-            case "*":
-                result = Double.parseDouble(firstNumber) * Double.parseDouble(secondNumber);
-                break;
-        }
+        double result = evaluator.evaluate(expression);
 
         // Display results:
         System.out.println(result);

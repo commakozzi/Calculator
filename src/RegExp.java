@@ -49,7 +49,7 @@ public class RegExp {
         String[]tokenArray = new String[tokens.size()];
         tokenArray = tokens.toArray(tokenArray);
         System.out.println(tokens);
-        calculator.calculate(tokenArray);
+        //calculator.calculate(tokenArray);
     } // End splitExp()
 
 }
